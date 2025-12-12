@@ -1,0 +1,101 @@
+#pragma kernel CSMain
+
+RWTexture2D<float4> _SnapshotTex; // UAV - persistent buffer (enableRandomWrite true)
+Texture2D<float4> _CurrentFrame; // SRV - current camera frame
+
+// Settings (set from C#)
+int _KernelRadius; // e.g. 1 => 3x3, 2 => 5x5
+float _MotionDiffThreshold; // threshold for considering a neighbor as "different" (0..1)
+float4 _Tint; // optional tint (usually 1,1,1,1)
+float _Time; // unused here but kept for compatibility
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    uint width, height;
+    _SnapshotTex.GetDimensions(width, height);
+
+    if (id.x >= width || id.y >= height)
+        return;
+
+    uint2 uv = id.xy;
+
+    // read current pixel
+    float4 live = _CurrentFrame[uv];
+
+    // read stored snapshot pixel
+    float4 prev = _SnapshotTex[uv];
+
+    // init snapshot on first use (alpha==0)
+    if (prev.a == 0.0)
+    {
+        _SnapshotTex[uv] = float4(live.rgb * _Tint.rgb, 1.0);
+        return;
+    }
+
+    // --- Local motion estimation: find neighbor with max color difference ---
+    float2 bestMotion = float2(0, 0);
+    float maxDiff = 0.0;
+
+    // clamp kernel radius to a reasonable max to avoid extremely heavy loops
+    int kr = clamp(_KernelRadius, 1, 8);
+
+    for (int y = -kr; y <= kr; y++)
+    {
+        for (int x = -kr; x <= kr; x++)
+        {
+            if (x == 0 && y == 0)
+                continue;
+            int2 n = int2(uv) + int2(x, y);
+            if (n.x < 0 || n.y < 0 || n.x >= int(width) || n.y >= int(height))
+                continue;
+
+            float4 neighbor = _CurrentFrame[n];
+            float diff = length(neighbor.rgb - live.rgb);
+            if (diff > maxDiff)
+            {
+                maxDiff = diff;
+                bestMotion = float2(x, y);
+            }
+        }
+    }
+
+    // decide whether motion is meaningful
+    bool hasMotion = (maxDiff >= _MotionDiffThreshold);
+
+    // --- compute previous-sample coords (subpixel not required here; use integer shift) ---
+    float2 prevUVf = float2(uv) - bestMotion; // shift snapshot by motion
+    prevUVf = clamp(prevUVf, 0.0, float2(width - 1, height - 1));
+
+    // fetch bilinear sample from snapshot for smoother trails
+    int2 uv00 = int2(floor(prevUVf));
+    int2 uv11 = int2(min(uv00 + 1, int2(width - 1, height - 1)));
+    float2 frac = prevUVf - uv00;
+
+    float4 c00 = _SnapshotTex[uv00];
+    float4 c10 = _SnapshotTex[int2(uv11.x, uv00.y)];
+    float4 c01 = _SnapshotTex[int2(uv00.x, uv11.y)];
+    float4 c11 = _SnapshotTex[uv11];
+
+    float4 displaced = lerp(lerp(c00, c10, frac.x), lerp(c01, c11, frac.x), frac.y);
+
+    // --- Persistence policy ---
+    // If there's motion, write the displaced snapshot (so trails continue).
+    // If there's no motion, use the live frame 
+    float4 outCol;
+    if (hasMotion)
+    {
+        // keep previous color and alpha as-is (persist)
+        outCol = displaced;
+    }
+    else
+    {
+        // no motion, overwrite snapshot with live pixel
+        outCol = float4(live.rgb * _Tint.rgb, 1.0);
+    }
+
+    // Ensure clamped values and store
+    outCol.rgb = saturate(outCol.rgb);
+    outCol.a = 1.0;
+    _SnapshotTex[uv] = outCol;
+}

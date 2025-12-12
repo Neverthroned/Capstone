@@ -1,0 +1,71 @@
+#pragma kernel CSMain
+
+RWTexture2D<float4> _SnapshotTex; // persistent buffer
+Texture2D<float4> _CurrentFrame; // latest camera frame
+
+// --- Settings ---
+float _Decay;
+float _NoiseScale;
+float _NoiseSpeed;
+float4 _Tint;
+float _Time;
+
+[numthreads(8, 8, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    uint width, height;
+    _SnapshotTex.GetDimensions(width, height);
+
+    if (id.x >= width || id.y >= height)
+        return;
+
+    uint2 uv = id.xy;
+
+    float4 live = _CurrentFrame[uv];
+
+    // Initialize snapshot if empty (alpha == 0)
+    float4 prev = _SnapshotTex[uv];
+    if (prev.a == 0.0)
+    {
+        _SnapshotTex[uv] = float4(live.rgb, 1.0);
+        return; // Skip rest
+    }
+    
+    // Simple motion estimation: check neighbors for difference
+    float2 motion = float2(0, 0);
+    float maxDiff = 0;
+    for (int y = -1; y <= 1; y++)
+    {
+        for (int x = -1; x <= 1; x++)
+        {
+            int2 nUV = int2(uv) + int2(x, y);
+            if (nUV.x < 0 || nUV.y < 0 || nUV.x >= int(width) || nUV.y >= int(height))
+                continue;
+
+            float4 neighbor = _CurrentFrame[nUV];
+            float diff = length(neighbor.rgb - live.rgb);
+            if (diff > maxDiff)
+            {
+                maxDiff = diff;
+                motion = float2(x, y);
+            }
+        }
+    }
+
+    // Add small random jitter
+    float n = frac(sin(dot(float2(uv), float2(12.9898, 78.233))) * 43758.5453 + _Time * _NoiseSpeed);
+    float2 jitter = (n - 0.5) * _NoiseScale;
+
+    // Offset previous frame by motion + jitter
+    int2 prevUV = int2(uv) - int2(motion + jitter + 0.5);
+    
+    float4 offsetSnap = float4(0, 0, 0, 0); // Default to black/clear
+    if (all(prevUV >= 0) && prevUV.x < int(width) && prevUV.y < int(height))
+        offsetSnap = _SnapshotTex[prevUV];
+    else
+        offsetSnap = prev;
+    
+    float4 result = lerp(live, prev, _Decay);
+    result.a = 1.0;
+    _SnapshotTex[uv] = result;
+}
