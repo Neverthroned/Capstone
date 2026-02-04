@@ -1,54 +1,38 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class cameraFollow : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
-    [Header("Sensitivity")]
     public float sensX = 200f;
     public float sensY = 200f;
+    public float rollSpeed = 90f;
 
-    [Header("References")]
     public Transform orientation;
-    public PlayerGravityManager gravityManager;
 
-    private float xRotation;
-    private float yRotation;
+    float yaw;
+    float pitch;
+    float roll;
 
-    private void Start()
+    void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-
-        // Auto-assign if not set
-        if (!gravityManager)
-            gravityManager = Object.FindFirstObjectByType<PlayerGravityManager>();
     }
 
-    private void Update()
+    void Update()
     {
-        // Mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        float mouseX = Input.GetAxisRaw("Mouse X") * sensX * Time.deltaTime;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * sensY * Time.deltaTime;
 
-        yRotation += mouseX;
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        yaw += mouseX;
+        pitch -= mouseY;
+        pitch = Mathf.Clamp(pitch, -89f, 89f);
 
-        // Get the player's current "up" direction from gravity
-        Vector3 playerUp = -gravityManager.CurrentGravityDir;
+        if (Input.GetKey(KeyCode.Q)) roll += rollSpeed * Time.deltaTime;
+        if (Input.GetKey(KeyCode.E)) roll -= rollSpeed * Time.deltaTime;
 
-        // Align to gravity
-        Quaternion gravityAligned = Quaternion.FromToRotation(Vector3.up, playerUp);
+        Quaternion rotation = Quaternion.Euler(pitch, yaw, roll);
 
-        // Apply yaw (around up) and pitch (around right)
-        Quaternion yaw = Quaternion.AngleAxis(yRotation, playerUp);
-        Quaternion pitch = Quaternion.AngleAxis(xRotation, orientation.right);
-
-        // Combine rotations
-        transform.rotation = yaw * gravityAligned * Quaternion.Euler(xRotation, 0, 0);
-
-        // Update orientation for movement
-        orientation.rotation = yaw * gravityAligned;
+        transform.rotation = rotation;
+        orientation.rotation = rotation;
     }
 }

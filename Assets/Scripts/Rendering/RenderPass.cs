@@ -1,8 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 
-public class GrappleTarget : MonoBehaviour
+[System.Serializable]
+public class RenderPass : CustomPass
 {
     // Start is called before the first frame update
     void Start()
