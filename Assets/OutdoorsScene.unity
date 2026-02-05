@@ -2863,8 +2863,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63c7ffb16220eec419c26f9fe4905337, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  groundDrag: 5
+  moveSpeed: 15
+  groundDrag: 2
   orientation: {fileID: 962481115}
 --- !u!54 &2079834536
 Rigidbody:
