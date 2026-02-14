@@ -2,15 +2,10 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    public float sensX = 200f;
-    public float sensY = 200f;
-    public float rollSpeed = 90f;
+    public float mouseSensitivity = 200f;
+    public float rollSpeed = 120f;
 
     public Transform orientation;
-
-    float yaw;
-    float pitch;
-    float roll;
 
     void Start()
     {
@@ -20,19 +15,23 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        float mouseX = Input.GetAxisRaw("Mouse X") * sensX * Time.deltaTime;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * sensY * Time.deltaTime;
+        float mouseX = Input.GetAxisRaw("Mouse X") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * mouseSensitivity * Time.deltaTime;
 
-        yaw += mouseX;
-        pitch -= mouseY;
-        pitch = Mathf.Clamp(pitch, -89f, 89f);
+        // Yaw (around local up)
+        transform.Rotate(Vector3.up, mouseX, Space.Self);
 
-        if (Input.GetKey(KeyCode.Q)) roll += rollSpeed * Time.deltaTime;
-        if (Input.GetKey(KeyCode.E)) roll -= rollSpeed * Time.deltaTime;
+        // Pitch (around local right)
+        transform.Rotate(Vector3.right, -mouseY, Space.Self);
 
-        Quaternion rotation = Quaternion.Euler(pitch, yaw, roll);
+        // Roll (around local forward)
+        float rollInput = 0f;
+        if (Input.GetKey(KeyCode.Q)) rollInput += 1f;
+        if (Input.GetKey(KeyCode.E)) rollInput -= 1f;
 
-        transform.rotation = rotation;
-        orientation.rotation = rotation;
+        transform.Rotate(Vector3.forward, rollInput * rollSpeed * Time.deltaTime, Space.Self);
+
+        // Keep movement orientation synced
+        orientation.rotation = transform.rotation;
     }
 }
