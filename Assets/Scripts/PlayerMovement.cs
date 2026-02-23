@@ -7,6 +7,7 @@ public class Movement : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed = 6f;
     public float groundDrag = 5f;
+    public float maxVelocity = 20f;
 
     [Header("References")]
     public Transform orientation; // player orientation and facing direction
@@ -16,6 +17,12 @@ public class Movement : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     private Vector3 moveDirection;
+
+    [Header("Dash")]
+    public float dashDistance = 10f;
+    public float dashCooldown = 0.5f;
+
+    private bool canDash = true;
 
     private void Start()
     {
@@ -35,8 +42,8 @@ public class Movement : MonoBehaviour
     {
         MovePlayer();
 
-        if (rb.velocity.magnitude > moveSpeed)
-            rb.velocity = rb.velocity.normalized * moveSpeed; // Prevents endless acceleration
+        if (rb.velocity.magnitude > maxVelocity)
+            rb.velocity = rb.velocity.normalized * maxVelocity; // Prevents endless acceleration
     }
 
     private void MyInput()
@@ -47,6 +54,11 @@ public class Movement : MonoBehaviour
         verticalMoveInput = 0f;
         if (Input.GetKey(KeyCode.Space)) verticalMoveInput += 1f;
         if (Input.GetKey(KeyCode.LeftControl)) verticalMoveInput -= 1f;
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
+        {
+            Dash();
+        }
     }
 
     private void MovePlayer()
@@ -60,5 +72,32 @@ public class Movement : MonoBehaviour
         {
             rb.AddForce(moveDirection.normalized * moveSpeed, ForceMode.Acceleration);
         }
+    }
+
+    void Dash()
+    {
+        Vector3 dashDirection =
+            orientation.forward * verticalInput +
+            orientation.right * horizontalInput +
+            orientation.up * verticalMoveInput;
+
+        // If player isn't pressing anything, dash forward
+        if (dashDirection.sqrMagnitude < 0.01f)
+            dashDirection = orientation.forward;
+
+        dashDirection.Normalize();
+
+        // Convert distance ¨ impulse
+        float dashForce = dashDistance / Time.fixedDeltaTime;
+
+        rb.AddForce(dashDirection * dashForce, ForceMode.VelocityChange);
+
+        canDash = false;
+        Invoke(nameof(ResetDash), dashCooldown);
+    }
+
+    void ResetDash()
+    {
+        canDash = true;
     }
 }
