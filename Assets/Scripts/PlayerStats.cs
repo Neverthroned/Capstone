@@ -39,5 +39,9 @@ public class PlayerStats : MonoBehaviour
         {
             TakeDamage(20f);
         }
+        if(Input.GetKeyUp(KeyCode.G))
+        {
+            Heal(20f);
+        }
     }
 }
