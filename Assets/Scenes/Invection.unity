@@ -3048,7 +3048,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: caaf357a08f916841a6f283a9c17fb43, type: 2}
-  - {fileID: 2100000, guid: 3b66c293c1a3c574eb8dd7e35504524a, type: 2}
+  - {fileID: 2100000, guid: c679c34db92af0648b036bd6b91070b4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3170,13 +3170,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
+      propertyPath: m_Cookie
+      value: 
+      objectReference: {fileID: 2800000, guid: 5547a4cff88ce6a4ebc2fcc1ca743e23, type: 3}
+    - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
+        type: 3}
       propertyPath: m_Color.b
-      value: 0.8871256
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
       propertyPath: m_Color.g
-      value: 0.5801887
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
@@ -3186,7 +3191,7 @@ PrefabInstance:
     - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
       propertyPath: m_Intensity
-      value: 3104.5823
+      value: 12854.622
       objectReference: {fileID: 0}
     - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
@@ -3206,7 +3211,7 @@ PrefabInstance:
     - target: {fileID: 6457817241945677573, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
       propertyPath: m_Intensity
-      value: 14.6001835
+      value: 16.65
       objectReference: {fileID: 0}
     - target: {fileID: 6457817241945677573, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}

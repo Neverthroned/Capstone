@@ -203,7 +203,7 @@ Material:
     - _NormalScale: 1
     - _ObjectSpaceUVMapping: 0
     - _ObjectSpaceUVMappingEmissive: 0
-    - _Octaves: 4
+    - _Octaves: 3.54
     - _OpaqueCullMode: 2
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
@@ -263,8 +263,8 @@ Material:
     - _BaseColor: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.509434, g: 0.509434, b: 0.509434, a: 1}
-    - _Color_1: {r: 0.8962264, g: 0.8962264, b: 0.8962264, a: 0}
-    - _Color_2: {r: 0, g: 9.937417, b: 11.98431, a: 0}
+    - _Color_1: {r: 1, g: 0.9103774, b: 0.9408792, a: 0}
+    - _Color_2: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
