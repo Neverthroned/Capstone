@@ -12,8 +12,8 @@ void Raycast_float(float3 RayOrigin, float3 RayDirection, float3 SphereOrigin, f
     HitPosition = float3(0.0, 0.0, 0.0);
     HitNormal = float3(0.0, 0.0, 0.0);
     float t = 0.0f;
-    float3 L = SphereOrigin - RayOrigin;
-    float tca = dot(L, -RayDirection);
+    float3 L = float3(SphereOrigin) - float3(RayOrigin);
+    float tca = dot(L, -float3(RayDirection));
     if (tca < 0)
     {
         Hit = 0.0f;
@@ -47,4 +47,34 @@ void MirrorUVCoordinates_float(float2 UVs, out float2 NewUVs)
     else
         NewUVs.y = UVs.y;
 
+}
+
+void AccretionDiskPolar_float(
+    float2 UV, // Input UV
+    float Time, // Time value (usually _Time.y)
+    float DiskSpeed, // Rotation speed
+    out float2 PolarUV, // Output UV for noise sampling
+    out float Radius, // Distance from center
+    out float Angle // Raw angle (optional use)
+)
+{
+    // Center UV coordinates
+    float2 centered = UV - 0.5;
+
+    // Distance from center
+    float dist = length(centered);
+
+    // Angle around center
+    float angle = atan2(centered.y, centered.x);
+
+    // Animate rotation
+    float scrolledAngle = angle + Time * DiskSpeed;
+
+    // Convert to UV space for texture sampling
+    float2 polarUV = float2(scrolledAngle / (2.0 * PI) + 0.5, dist);
+
+    // Outputs
+    PolarUV = polarUV;
+    Radius = dist;
+    Angle = angle;
 }

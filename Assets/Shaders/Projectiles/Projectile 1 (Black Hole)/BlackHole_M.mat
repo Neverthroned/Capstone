@@ -51,6 +51,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _CameraColorTexture:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _CoatMaskMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -175,12 +179,12 @@ Material:
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 0
-    - _Dissolve: 0.17
+    - _Dissolve: 0.07
     - _DissolveAmount: 0.44
     - _DissolveAmount1: 0.51
     - _DissolveAmount2: 2.9
     - _DistortionAmount: 0.84
-    - _DistortionExponent: 4.9
+    - _DistortionExponent: 3.44
     - _DistortionScale: 2.03
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
@@ -196,7 +200,7 @@ Material:
     - _EnableGeometricSpecularAA: 0
     - _EnergyConservingSpecularColor: 1
     - _ExcludeFromTUAndAA: 0
-    - _FresnelPower: 0.07
+    - _FresnelPower: 0.09
     - _HeightAmplitude: 0.02
     - _HeightCenter: 0.5
     - _HeightMapParametrization: 0
@@ -206,6 +210,7 @@ Material:
     - _HeightPoMAmplitude: 2
     - _HeightTessAmplitude: 2
     - _HeightTessCenter: 0.5
+    - _InnerRadius: 0.23
     - _InvTilingScale: 1
     - _Ior: 1.5
     - _IridescenceMask: 1
@@ -220,8 +225,9 @@ Material:
     - _ObjectSpaceUVMapping: 0
     - _ObjectSpaceUVMappingEmissive: 0
     - _OpaqueCullMode: 2
-    - _OuterGlowExponent: 3.31
-    - _OuterGlowMultiplier: -4.73
+    - _OuterGlowExponent: 3.57
+    - _OuterGlowMultiplier: -1.47
+    - _OuterRadius: 0.4
     - _PPDLodThreshold: 5
     - _PPDMaxSamples: 15
     - _PPDMinSamples: 5
@@ -234,7 +240,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 4
     - _RotationAmount: 5.58
-    - _ScreenSpaceScale: 1.07
+    - _ScreenSpaceScale: 1
     - _Smoothness: 0.5
     - _SmoothnessRemapMax: 1
     - _SmoothnessRemapMin: 0
@@ -242,7 +248,7 @@ Material:
     - _SpecularAAScreenSpaceVariance: 0.1
     - _SpecularAAThreshold: 0.2
     - _SpecularOcclusionMode: 1
-    - _SpherePercentage: 0.15
+    - _SpherePercentage: 0.1
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 1
@@ -269,7 +275,7 @@ Material:
     - _TransparentSortPriority: 0
     - _TransparentWritingMotionVec: 0
     - _TransparentZWrite: 0
-    - _TwirlStrength: 91.85
+    - _TwirlStrength: 2.1
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
