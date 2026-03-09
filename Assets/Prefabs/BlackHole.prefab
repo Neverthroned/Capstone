@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 194170638963930056}
   - component: {fileID: 6500047958060284789}
   - component: {fileID: 6457578853285308702}
-  m_Layer: 7
+  m_Layer: 9
   m_Name: BlackHole
-  m_TagString: Untagged
+  m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -157,3 +157,6 @@ MonoBehaviour:
   mergeDistance: 3
   whiteHolePrefab: {fileID: 7746434689395991740, guid: b598903d276f09b42ba3c1d2ef7b2037,
     type: 3}
+  affectedLayers:
+    serializedVersion: 2
+    m_Bits: 512

@@ -18,6 +18,8 @@ public class BlackHoleProjectile : MonoBehaviour
     [Header("Merge")]
     public GameObject whiteHolePrefab;
 
+    [SerializeField] private LayerMask affectedLayers;
+
     private bool isActive = false;
     private bool hasMerged = false;         // Guard against double merge
     private Vector3 velocity;              // Track velocity for white hole inheritance
@@ -37,7 +39,7 @@ public class BlackHoleProjectile : MonoBehaviour
 
     private void ApplyGravityToNearby()
     {
-        Collider[] hits = Physics.OverlapSphere(transform.position, gravityRadius);
+        Collider[] hits = Physics.OverlapSphere(transform.position, gravityRadius, affectedLayers);
 
         foreach (Collider hit in hits)
         {
@@ -75,7 +77,7 @@ public class BlackHoleProjectile : MonoBehaviour
                     DestroyBlackHole();
                     return;
                 }
-                else if (otherBlackHole == null)
+                else if (otherBlackHole == null && hit.CompareTag("Projectile"))
                 {
                     Destroy(hit.gameObject);
                 }

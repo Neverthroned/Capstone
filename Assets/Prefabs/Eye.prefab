@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3481639790172983208}
   - component: {fileID: 5160819783130833094}
   - component: {fileID: 6457817241945677573}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,10 +43,10 @@ Light:
   m_Enabled: 1
   serializedVersion: 11
   m_Type: 0
-  m_Color: {r: 0.80392164, g: 0.08235294, b: 0.2784314, a: 1}
-  m_Intensity: 7696.5693
-  m_Range: 96.8
-  m_SpotAngle: 128.14285
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 5042.768
+  m_Range: 78.21
+  m_SpotAngle: 47.089287
   m_InnerSpotAngle: 10.535712
   m_CookieSize: 10
   m_Shadows:
@@ -75,7 +75,7 @@ Light:
       e32: 1
       e33: 0
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 2800000, guid: 5547a4cff88ce6a4ebc2fcc1ca743e23, type: 3}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -92,7 +92,7 @@ Light:
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 69.8}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0.025
+  m_ShadowRadius: 6
   m_ShadowAngle: 0
 --- !u!114 &6457817241945677573
 MonoBehaviour:
@@ -109,13 +109,13 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 15.91
+  m_Intensity: 15.3
   m_EnableSpotReflector: 1
   m_LuxAtDistance: 1
-  m_InnerSpotPercent: 0.78037906
+  m_InnerSpotPercent: 2.1236253
   m_SpotIESCutoffPercent: 100
   m_LightDimmer: 1
-  m_VolumetricDimmer: 10.1
+  m_VolumetricDimmer: 5.9
   m_LightUnit: 4
   m_FadeDistance: 10000
   m_VolumetricFadeDistance: 10000
@@ -125,7 +125,7 @@ MonoBehaviour:
   m_ShapeWidth: 0.5
   m_ShapeHeight: 0.5
   m_AspectRatio: 2.1
-  m_ShapeRadius: 0.025
+  m_ShapeRadius: 6
   m_SoftnessScale: 1
   m_UseCustomSpotLightShadowCone: 0
   m_CustomSpotLightShadowCone: 12
@@ -192,7 +192,7 @@ MonoBehaviour:
     m_UseOverride: 1
     m_Level: 0
   m_ShadowDimmer: 1
-  m_VolumetricShadowDimmer: 0.452
+  m_VolumetricShadowDimmer: 0.461
   m_ShadowFadeDistance: 10000
   m_UseContactShadow:
     m_Override: 0
@@ -247,7 +247,7 @@ GameObject:
   - component: {fileID: 236556732501453124}
   - component: {fileID: 7640234903514729002}
   - component: {fileID: 61354434720727838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye Outer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 987217862871489523}
-  m_Layer: 0
+  - component: {fileID: 8418719470453098733}
+  m_Layer: 8
   m_Name: Eye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -376,6 +377,20 @@ Transform:
   - {fileID: 3481639790172983208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8418719470453098733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5746053834697347896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f08eef5ce86e4eb4bad679baf01d80b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  rotationSpeed: 0.5
 --- !u!1 &5815515084715594766
 GameObject:
   m_ObjectHideFlags: 0
@@ -388,7 +403,7 @@ GameObject:
   - component: {fileID: 74839259330466723}
   - component: {fileID: 2013745168511639606}
   - component: {fileID: 8323515050614222158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Eye Inner
   m_TagString: Untagged
   m_Icon: {fileID: 0}

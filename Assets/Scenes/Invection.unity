@@ -454,7 +454,7 @@ GameObject:
   - component: {fileID: 219571660}
   - component: {fileID: 219571659}
   - component: {fileID: 219571661}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PlayerMesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1060,6 +1060,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Collider
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 3d7992bb53d83f74dabbe5704902a7b2,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -7511558181221131132, guid: 3d7992bb53d83f74dabbe5704902a7b2, type: 3}
     m_RemovedGameObjects: []
@@ -1308,7 +1313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 660767201}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ShootAttackPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1712,7 +1717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 962481115}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Orientation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1850,7 +1855,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1210677147}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2042,32 +2047,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackHole
       objectReference: {fileID: 0}
+    - target: {fileID: 1807819613124011915, guid: fc07743e95f8e554c9deb9b7743d61b9,
+        type: 3}
+      propertyPath: m_TagString
+      value: Projectile
+      objectReference: {fileID: 0}
     - target: {fileID: 6457578853285308702, guid: fc07743e95f8e554c9deb9b7743d61b9,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2079834534}
-    - target: {fileID: 6457578853285308702, guid: fc07743e95f8e554c9deb9b7743d61b9,
-        type: 3}
-      propertyPath: gravityRadius
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 6457578853285308702, guid: fc07743e95f8e554c9deb9b7743d61b9,
-        type: 3}
-      propertyPath: mergeDistance
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6457578853285308702, guid: fc07743e95f8e554c9deb9b7743d61b9,
-        type: 3}
-      propertyPath: gravityStrength
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6457578853285308702, guid: fc07743e95f8e554c9deb9b7743d61b9,
-        type: 3}
-      propertyPath: whiteHolePrefab
-      value: 
-      objectReference: {fileID: 7746434689395991740, guid: b598903d276f09b42ba3c1d2ef7b2037,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2084,7 +2073,7 @@ GameObject:
   - component: {fileID: 1268833676}
   - component: {fileID: 1268833678}
   - component: {fileID: 1268833677}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ArenaOuter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2204,26 +2193,6 @@ Transform:
   - {fileID: 1561740881}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1477667333 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5746053834697347896, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-    type: 3}
-  m_PrefabInstance: {fileID: 3620406619468220886}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1477667335
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1477667333}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f08eef5ce86e4eb4bad679baf01d80b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 2079834537}
-  rotationSpeed: 0.5
 --- !u!1 &1482719446
 GameObject:
   m_ObjectHideFlags: 0
@@ -2527,7 +2496,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 262295
+    m_Bits: 263127
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8600000, guid: 3cbe10ac749d6924c9915a3241a32374, type: 2}
   m_TargetDisplay: 0
@@ -3000,7 +2969,7 @@ GameObject:
   - component: {fileID: 2079834536}
   - component: {fileID: 2079834535}
   - component: {fileID: 2079834538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: 'Player '
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -3112,7 +3081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 543450653090840205}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Arena
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3237,104 +3206,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3106363000089647034, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 0.24705882
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106363000089647034, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106363000089647034, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3106363000089647034, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 50929.547
-      objectReference: {fileID: 0}
-    - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Range
-      value: 78.21
-      objectReference: {fileID: 0}
-    - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Cookie
-      value: 
-      objectReference: {fileID: 2800000, guid: 5547a4cff88ce6a4ebc2fcc1ca743e23, type: 3}
-    - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Color.b
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Color.g
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Color.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_Intensity
-      value: 5042.768
-      objectReference: {fileID: 0}
-    - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_SpotAngle
-      value: 47.089287
-      objectReference: {fileID: 0}
-    - target: {fileID: 5160819783130833094, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_ShadowRadius
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 5746053834697347896, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
       propertyPath: m_Name
       value: Eye
       objectReference: {fileID: 0}
-    - target: {fileID: 6457817241945677573, guid: 67420a51936ac3a4688780ebd8d8cd3f,
+    - target: {fileID: 8418719470453098733, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
-      propertyPath: m_Intensity
-      value: 15.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6457817241945677573, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_ShapeRadius
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6457817241945677573, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_InnerSpotPercent
-      value: 2.1236253
-      objectReference: {fileID: 0}
-    - target: {fileID: 6457817241945677573, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_VolumetricDimmer
-      value: 5.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 6457817241945677573, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      propertyPath: m_VolumetricShadowDimmer
-      value: 0.461
-      objectReference: {fileID: 0}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2079834537}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5746053834697347896, guid: 67420a51936ac3a4688780ebd8d8cd3f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1477667335}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67420a51936ac3a4688780ebd8d8cd3f, type: 3}
 --- !u!1 &4599059136941461621
 GameObject:
@@ -3347,7 +3232,7 @@ GameObject:
   - component: {fileID: 3048680033474329004}
   - component: {fileID: 8664972525178572559}
   - component: {fileID: 1319383013063154475}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ArenaInner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3420,15 +3305,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6849077087894788703, guid: b598903d276f09b42ba3c1d2ef7b2037,
-        type: 3}
-      propertyPath: maxScale
-      value: 75
-      objectReference: {fileID: 0}
     - target: {fileID: 7746434689395991740, guid: b598903d276f09b42ba3c1d2ef7b2037,
         type: 3}
       propertyPath: m_Name
       value: WhiteHole
+      objectReference: {fileID: 0}
+    - target: {fileID: 7746434689395991740, guid: b598903d276f09b42ba3c1d2ef7b2037,
+        type: 3}
+      propertyPath: m_TagString
+      value: Projectile
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
