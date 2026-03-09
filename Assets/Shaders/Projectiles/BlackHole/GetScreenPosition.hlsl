@@ -49,32 +49,3 @@ void MirrorUVCoordinates_float(float2 UVs, out float2 NewUVs)
 
 }
 
-void AccretionDiskPolar_float(
-    float2 UV, // Input UV
-    float Time, // Time value (usually _Time.y)
-    float DiskSpeed, // Rotation speed
-    out float2 PolarUV, // Output UV for noise sampling
-    out float Radius, // Distance from center
-    out float Angle // Raw angle (optional use)
-)
-{
-    // Center UV coordinates
-    float2 centered = UV - 0.5;
-
-    // Distance from center
-    float dist = length(centered);
-
-    // Angle around center
-    float angle = atan2(centered.y, centered.x);
-
-    // Animate rotation
-    float scrolledAngle = angle + Time * DiskSpeed;
-
-    // Convert to UV space for texture sampling
-    float2 polarUV = float2(scrolledAngle / (2.0 * PI) + 0.5, dist);
-
-    // Outputs
-    PolarUV = polarUV;
-    Radius = dist;
-    Angle = angle;
-}
