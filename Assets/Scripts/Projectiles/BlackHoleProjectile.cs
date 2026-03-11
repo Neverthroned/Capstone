@@ -18,7 +18,11 @@ public class BlackHoleProjectile : MonoBehaviour
     [Header("Merge")]
     public GameObject whiteHolePrefab;
 
+    [Header("Damage")]
+    public float damageAmount = 10f;
+
     [SerializeField] private LayerMask affectedLayers;
+    [SerializeField] private LayerMask damageLayers;
 
     private bool isActive = false;
     private bool hasMerged = false;         // Guard against double merge
@@ -40,7 +44,6 @@ public class BlackHoleProjectile : MonoBehaviour
     private void ApplyGravityToNearby()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, gravityRadius, affectedLayers);
-
         foreach (Collider hit in hits)
         {
             if (hit.gameObject == gameObject) continue;
@@ -81,6 +84,17 @@ public class BlackHoleProjectile : MonoBehaviour
                 {
                     Destroy(hit.gameObject);
                 }
+            }
+        }
+        Collider[] damageHits = Physics.OverlapSphere(transform.position, mergeDistance, damageLayers);
+        foreach (Collider hit in damageHits)
+        {
+            PlayerStats playerStats = hit.GetComponent<PlayerStats>();
+            if (playerStats != null)
+            {
+                playerStats.TakeDamage(damageAmount);
+                DestroyBlackHole();
+                return;
             }
         }
     }

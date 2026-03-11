@@ -456,7 +456,7 @@ GameObject:
   - component: {fileID: 219571661}
   m_Layer: 6
   m_Name: PlayerMesh
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2047,16 +2047,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlackHole
       objectReference: {fileID: 0}
-    - target: {fileID: 1807819613124011915, guid: fc07743e95f8e554c9deb9b7743d61b9,
-        type: 3}
-      propertyPath: m_TagString
-      value: Projectile
-      objectReference: {fileID: 0}
     - target: {fileID: 6457578853285308702, guid: fc07743e95f8e554c9deb9b7743d61b9,
         type: 3}
       propertyPath: target
       value: 
       objectReference: {fileID: 2079834534}
+    - target: {fileID: 6457578853285308702, guid: fc07743e95f8e554c9deb9b7743d61b9,
+        type: 3}
+      propertyPath: damageLayers.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2526,9 +2526,9 @@ MonoBehaviour:
   - {fileID: 1561885167}
   - {fileID: 1923975229}
   target: {fileID: 2079834534}
-  speed: 5
+  speed: 10
   scaleUpDuration: 0.5
-  maxScale: 5
+  maxScale: 10
 --- !u!1 &1561885167
 GameObject:
   m_ObjectHideFlags: 0
