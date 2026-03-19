@@ -37,10 +37,10 @@
             "m_Id": "f4dc3a39be404955a7aa6e1bd7d0c30f"
         },
         {
-            "m_Id": "f7cf3865a40349d4a20d865b40b85fa0"
+            "m_Id": "0e3408083434426a9480ca2cb0c8d00d"
         },
         {
-            "m_Id": "0e3408083434426a9480ca2cb0c8d00d"
+            "m_Id": "c217b8168d294f5b92920ddd7931e7a0"
         }
     ],
     "m_Keywords": [],
@@ -1347,7 +1347,7 @@
             },
             "m_InputSlot": {
                 "m_Node": {
-                    "m_Id": "699c7fb1250446618c1e953383fbddb2"
+                    "m_Id": "368a73f3419548539acb9f720c0b82af"
                 },
                 "m_SlotId": 0
             }
@@ -3731,10 +3731,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -1387.0340576171875,
-            "y": 281.9659423828125,
-            "width": 160.0,
-            "height": 136.0
+            "x": -1282.0,
+            "y": 286.0,
+            "width": 159.9998779296875,
+            "height": 136.00003051757813
         }
     },
     "m_Slots": [
@@ -10351,6 +10351,36 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Texture2DShaderProperty",
+    "m_ObjectId": "c217b8168d294f5b92920ddd7931e7a0",
+    "m_Guid": {
+        "m_GuidSerialized": "2caab355-152b-44a1-9557-4ae65955bac0"
+    },
+    "m_Name": "RenderTexture",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "RenderTexture",
+    "m_DefaultReferenceName": "_RenderTexture",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":8600000,\"guid\":\"3cbe10ac749d6924c9915a3241a32374\",\"type\":2}}",
+        "m_Guid": ""
+    },
+    "isMainTexture": false,
+    "useTilingAndOffset": false,
+    "m_Modifiable": true,
+    "m_DefaultType": 0
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "c26f9515d65b43ad84cfd55f67a47ecf",
     "m_Group": {
@@ -11183,10 +11213,10 @@
             "m_Id": "f4dc3a39be404955a7aa6e1bd7d0c30f"
         },
         {
-            "m_Id": "f7cf3865a40349d4a20d865b40b85fa0"
+            "m_Id": "0e3408083434426a9480ca2cb0c8d00d"
         },
         {
-            "m_Id": "0e3408083434426a9480ca2cb0c8d00d"
+            "m_Id": "c217b8168d294f5b92920ddd7931e7a0"
         }
     ]
 }
@@ -12548,34 +12578,6 @@
     "m_Value": 1.0,
     "m_DefaultValue": 1.0,
     "m_Labels": []
-}
-
-{
-    "m_SGVersion": 1,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector1ShaderProperty",
-    "m_ObjectId": "f7cf3865a40349d4a20d865b40b85fa0",
-    "m_Guid": {
-        "m_GuidSerialized": "6cdec2d0-855c-43fe-af0c-1fc70a96768e"
-    },
-    "m_Name": "TwirlStrength",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "TwirlStrength",
-    "m_DefaultReferenceName": "_TwirlStrength",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": 0.0,
-    "m_FloatType": 0,
-    "m_RangeValues": {
-        "x": 0.0,
-        "y": 1.0
-    }
 }
 
 {

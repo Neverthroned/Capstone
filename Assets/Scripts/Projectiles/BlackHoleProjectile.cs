@@ -24,11 +24,17 @@ public class BlackHoleProjectile : MonoBehaviour
     [SerializeField] private LayerMask affectedLayers;
     [SerializeField] private LayerMask damageLayers;
 
+    private PlayerStats playerStats;
+
     private bool isActive = false;
     private bool hasMerged = false;         // Guard against double merge
     private Vector3 velocity;              // Track velocity for white hole inheritance
     private Coroutine homingCoroutine;
 
+    public void Start()
+    {
+        playerStats = FindFirstObjectByType<PlayerStats>();
+    }
     public void Launch()
     {
         isActive = true;
@@ -89,7 +95,7 @@ public class BlackHoleProjectile : MonoBehaviour
         Collider[] damageHits = Physics.OverlapSphere(transform.position, mergeDistance, damageLayers);
         foreach (Collider hit in damageHits)
         {
-            PlayerStats playerStats = hit.GetComponent<PlayerStats>();
+            Debug.Log("Hit");
             if (playerStats != null)
             {
                 playerStats.TakeDamage(damageAmount);
