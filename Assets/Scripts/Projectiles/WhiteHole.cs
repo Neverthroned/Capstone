@@ -21,20 +21,23 @@ public class WhiteHole : MonoBehaviour
     [SerializeField] private LayerMask damageLayers;  // Layers that the white hole can damage
     [SerializeField] private float damageRadius = 3f; // AoE radius
 
+    private Rigidbody rb;
 
-    public void Start()
+    private void Start()
     {
         playerStats = FindFirstObjectByType<PlayerStats>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void Launch(Vector3 initialVelocity)
     {
+        rb.velocity = velocity;
         // Use initial direction but enforce a minimum launch speed so slow black holes still produce a lively white hole
         velocity = initialVelocity.magnitude > 0.1f
             ? initialVelocity.normalized * Mathf.Max(initialVelocity.magnitude, maxSpeed * 0.3f)
             : Random.onUnitSphere * maxSpeed * 0.3f;    // Fallback if black holes somehow had no velocity
 
-        StartCoroutine(ScaleAndDamageRoutine());
+        StartCoroutine(ScaleRoutine());
     }
 
     private void Update()
@@ -50,58 +53,49 @@ public class WhiteHole : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        velocity = Vector3.Reflect(velocity, collision.contacts[0].normal) * bounceDamping;
+        int otherLayer = collision.gameObject.layer;
+
+        // DAMAGE PLAYER (layer-based)
+        if ((damageLayers.value & (1 << otherLayer)) != 0)
+        {
+            if (playerStats != null)
+            {
+                playerStats.TakeDamage(damageAmount);
+            }
+
+            DestroyWhiteHole();
+            return;
+        }
+
+        // OTHERWISE: bounce
+        Vector3 normal = collision.contacts[0].normal;
+        velocity = Vector3.Reflect(velocity, normal) * bounceDamping;
+
+        rb.velocity = velocity;
+
         bounceCount++;
 
         if (bounceCount >= maxBounces)
-            Destroy(gameObject);
+            DestroyWhiteHole();
     }
 
-    private IEnumerator ScaleAndDamageRoutine()
+    private IEnumerator ScaleRoutine()
     {
         float elapsed = 0f;
 
-        // Scale up animation
         while (elapsed < scaleUpDuration)
         {
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / scaleUpDuration);
-            float easedT = 1f - Mathf.Pow(1f - t, 3f);  // cubic ease out
+            float easedT = 1f - Mathf.Pow(1f - t, 3f);
             transform.localScale = Vector3.one * (easedT * maxScale);
-
-            // Apply damage each frame
-            ApplyDamage();
 
             yield return null;
         }
 
         transform.localScale = Vector3.one * maxScale;
-
-        // Optional: keep damaging objects for a short duration
-        float sustainTime = 1f;
-        elapsed = 0f;
-        while (elapsed < sustainTime)
-        {
-            elapsed += Time.deltaTime;
-            ApplyDamage();
-            yield return null;
-        }
     }
 
-    private void ApplyDamage()
-    {
-        Collider[] hits = Physics.OverlapSphere(transform.position, damageRadius, damageLayers);
-
-        foreach (Collider hit in hits)
-        {
-            if (playerStats != null)
-            {
-                playerStats.TakeDamage(damageAmount);
-                DestroyWhiteHole();
-                return;
-            }
-        }
-    }
     public void DestroyWhiteHole()
     {
         Destroy(gameObject);

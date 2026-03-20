@@ -132,10 +132,10 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &6457578853285308702
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,12 +149,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 5
+  speed: 10
   scaleUpDuration: 3
   maxScale: 10
   gravityRadius: 20
   gravityStrength: 8
-  mergeDistance: 3
   whiteHolePrefab: {fileID: 7746434689395991740, guid: b598903d276f09b42ba3c1d2ef7b2037,
     type: 3}
   damageAmount: 10
