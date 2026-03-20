@@ -19,12 +19,14 @@ public class PlayerStats : MonoBehaviour
 
     private void SetHealth(float value)
     {
+        Debug.Log($"SetHealth called with: {value}");
         currentHealth = Mathf.Clamp(value, 0f, maxHealth);
         healthBar.SetSlider(currentHealth);
     }
 
     public void TakeDamage(float amount)
     {
+        Debug.Log($"TakeDamage called with: {amount}, currentHealth: {currentHealth}");
         SetHealth(currentHealth - amount);
     }
 
@@ -35,10 +37,6 @@ public class PlayerStats : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.F))
-        {
-            TakeDamage(20f);
-        }
         if(Input.GetKeyUp(KeyCode.G))
         {
             Heal(20f);

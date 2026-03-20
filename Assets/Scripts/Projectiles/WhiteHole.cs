@@ -27,40 +27,42 @@ public class WhiteHole : MonoBehaviour
     {
         playerStats = FindFirstObjectByType<PlayerStats>();
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = false; // Must be false for OnCollisionEnter to fire
     }
 
     public void Launch(Vector3 initialVelocity)
     {
-        rb.velocity = velocity;
-        // Use initial direction but enforce a minimum launch speed so slow black holes still produce a lively white hole
         velocity = initialVelocity.magnitude > 0.1f
             ? initialVelocity.normalized * Mathf.Max(initialVelocity.magnitude, maxSpeed * 0.3f)
-            : Random.onUnitSphere * maxSpeed * 0.3f;    // Fallback if black holes somehow had no velocity
+            : Random.onUnitSphere * maxSpeed * 0.3f;
 
+        rb.velocity = velocity;
         StartCoroutine(ScaleRoutine());
     }
 
     private void Update()
     {
-        if (velocity.magnitude < maxSpeed)
-            velocity += velocity.normalized * acceleration * Time.deltaTime;
+        // Accelerate up to max speed
+        if (rb.velocity.magnitude < maxSpeed)
+            rb.velocity += rb.velocity.normalized * acceleration * Time.deltaTime;
 
-        // Hard clamp so it never exceeds max
-        velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
-
-        transform.position += velocity * Time.deltaTime;
+        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
+
         int otherLayer = collision.gameObject.layer;
 
         // DAMAGE PLAYER (layer-based)
         if ((damageLayers.value & (1 << otherLayer)) != 0)
         {
-            if (playerStats != null)
+            Debug.Log($"playerStats is null: {playerStats == null}");
+            PlayerStats stats = collision.gameObject.GetComponentInParent<PlayerStats>();
+            if (stats != null)
             {
-                playerStats.TakeDamage(damageAmount);
+                stats.TakeDamage(damageAmount);
             }
 
             DestroyWhiteHole();

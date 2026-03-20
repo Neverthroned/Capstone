@@ -13,6 +13,7 @@ public class BlackHoleProjectile : MonoBehaviour
     [Header("Gravity")]
     public float gravityRadius = 8f;
     public float gravityStrength = 15f;
+    public float mergeDistance = 0.5f;
 
     [Header("Merge")]
     public GameObject whiteHolePrefab;
@@ -26,7 +27,6 @@ public class BlackHoleProjectile : MonoBehaviour
     private PlayerStats playerStats;
 
     private bool isActive = false;
-    private bool hasMerged = false;
 
     private Vector3 velocity;
     private Rigidbody rb;
@@ -35,10 +35,6 @@ public class BlackHoleProjectile : MonoBehaviour
     {
         playerStats = FindFirstObjectByType<PlayerStats>();
         rb = GetComponent<Rigidbody>();
-
-        // Safety
-        rb.useGravity = false;
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
     public void Launch()
@@ -75,53 +71,36 @@ public class BlackHoleProjectile : MonoBehaviour
         {
             if (hit.gameObject == gameObject) continue;
 
+            float distance = Vector3.Distance(transform.position, hit.transform.position);
+
+            // Absorb projectiles within mergeDistance
+            if (distance <= mergeDistance && hit.CompareTag("Projectile"))
+            {
+                Destroy(hit.gameObject);
+                continue;
+            }
+
+            // Pull everything else with a rigidbody
             Rigidbody otherRb = hit.attachedRigidbody;
             if (otherRb == null) continue;
 
-            float distance = Vector3.Distance(transform.position, hit.transform.position);
-
             float pull = gravityStrength / Mathf.Max(distance * distance, 0.1f);
-
             Vector3 dir = (transform.position - hit.transform.position).normalized;
-
             otherRb.velocity += dir * pull * Time.deltaTime;
         }
 
         // Damage player
-        Collider[] damageHits = Physics.OverlapSphere(transform.position, 0.5f, damageLayers);
+        Collider[] damageHits = Physics.OverlapSphere(transform.position, mergeDistance, damageLayers);
         foreach (Collider hit in damageHits)
         {
-            if (playerStats != null)
+            Debug.Log($"Hit: {hit.gameObject.name} | Has PlayerStats: {hit.GetComponent<PlayerStats>() != null}");
+            PlayerStats stats = hit.GetComponentInParent<PlayerStats>();
+            if (stats != null)
             {
-                playerStats.TakeDamage(damageAmount);
+                stats.TakeDamage(damageAmount);
                 DestroyBlackHole();
                 return;
             }
-        }
-    }
-
-    // MERGE VIA COLLISION (reliable now)
-    private void OnCollisionEnter(Collision collision)
-    {
-        BlackHoleProjectile other = collision.gameObject.GetComponent<BlackHoleProjectile>();
-
-        if (other != null && !hasMerged && !other.hasMerged)
-        {
-            hasMerged = true;
-            other.hasMerged = true;
-
-            Vector3 midpoint = (transform.position + other.transform.position) / 2f;
-            Vector3 combinedVelocity = rb.velocity + other.rb.velocity;
-
-            GameObject whiteHole = Instantiate(whiteHolePrefab, midpoint, Quaternion.identity);
-
-            WhiteHole wh = whiteHole.GetComponent<WhiteHole>();
-            wh.scaleUpDuration = scaleUpDuration;
-            wh.maxScale = maxScale;
-            wh.Launch(combinedVelocity);
-
-            other.DestroyBlackHole();
-            DestroyBlackHole();
         }
     }
 

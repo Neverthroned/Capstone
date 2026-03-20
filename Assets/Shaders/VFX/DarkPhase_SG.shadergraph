@@ -459,9 +459,9 @@
     "m_Guid": {
         "m_GuidSerialized": "391ed3de-253e-451e-9d6c-2595316b6a13"
     },
-    "m_Name": "Alpha",
+    "m_Name": "_Alpha",
     "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Alpha",
+    "m_RefNameGeneratedByDisplayName": "_Alpha",
     "m_DefaultReferenceName": "_Alpha",
     "m_OverrideReferenceName": "",
     "m_GeneratePropertyBlock": true,
@@ -627,7 +627,7 @@
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "a8e1ba311a57401aa975268141d46775",
     "m_Id": 0,
-    "m_DisplayName": "Alpha",
+    "m_DisplayName": "_Alpha",
     "m_SlotType": 1,
     "m_Hidden": false,
     "m_ShaderOutputName": "Out",
