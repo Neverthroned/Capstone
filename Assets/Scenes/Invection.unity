@@ -2752,6 +2752,7 @@ GameObject:
   - component: {fileID: 1561740883}
   - component: {fileID: 1561740882}
   - component: {fileID: 1561740886}
+  - component: {fileID: 1561740887}
   m_Layer: 0
   m_Name: PlayerCam
   m_TagString: MainCamera
@@ -3004,6 +3005,25 @@ MonoBehaviour:
   speed: 10
   scaleUpDuration: 0.5
   maxScale: 10
+--- !u!114 &1561740887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1561740880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c747c21ab53024081d7e3524024059, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WhiteHolePrefab: {fileID: 7746434689395991740, guid: b598903d276f09b42ba3c1d2ef7b2037,
+    type: 3}
+  spawnPositions:
+  - {fileID: 1561885167}
+  - {fileID: 1923975229}
+  target: {fileID: 2079834534}
+  speed: 10
 --- !u!1 &1561885167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3053,7 +3073,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1611222674
 MeshCollider:
   m_ObjectHideFlags: 0
