@@ -210,7 +210,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!135 &15655086
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1316,7 +1316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ef1fb3196b182f4bb96036e3b17765c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  length: 1.2
+  length: 2.54
 --- !u!64 &511935494
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2303,7 +2303,7 @@ PrefabInstance:
     - target: {fileID: 49803289883095126, guid: fc07743e95f8e554c9deb9b7743d61b9,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12
+      value: -71.5
       objectReference: {fileID: 0}
     - target: {fileID: 49803289883095126, guid: fc07743e95f8e554c9deb9b7743d61b9,
         type: 3}
@@ -2365,6 +2365,136 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc07743e95f8e554c9deb9b7743d61b9, type: 3}
+--- !u!1 &1239718431
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1239718432}
+  - component: {fileID: 1239718434}
+  - component: {fileID: 1239718433}
+  - component: {fileID: 1239718435}
+  m_Layer: 0
+  m_Name: Flamethrower
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1239718432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239718431}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 4.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3620406619468220887}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!73398921 &1239718433
+VFXRenderer:
+  serializedVersion: 1
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239718431}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+--- !u!2083052967 &1239718434
+VisualEffect:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239718431}
+  m_Enabled: 1
+  m_Asset: {fileID: 8926484042661614526, guid: d45ac394173df06409f3b6a74afcc32d, type: 3}
+  m_InitialEventName: OnPlay
+  m_InitialEventNameOverriden: 0
+  m_StartSeed: 0
+  m_ResetSeedOnPlay: 1
+  m_AllowInstancing: 1
+  m_ResourceVersion: 1
+  m_PropertySheet:
+    m_Float:
+      m_Array: []
+    m_Vector2f:
+      m_Array: []
+    m_Vector3f:
+      m_Array: []
+    m_Vector4f:
+      m_Array: []
+    m_Uint:
+      m_Array: []
+    m_Int:
+      m_Array: []
+    m_Matrix4x4f:
+      m_Array: []
+    m_AnimationCurve:
+      m_Array: []
+    m_Gradient:
+      m_Array: []
+    m_NamedObject:
+      m_Array: []
+    m_Bool:
+      m_Array: []
+--- !u!114 &1239718435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239718431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797c88870c8c564438ffdb9be08cc7d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segmentCount: 12
+  segmentSpacing: 0.5
+  followSpeed: 15
+  damageRadius: 0.4
 --- !u!1 &1268833675
 GameObject:
   m_ObjectHideFlags: 0
@@ -4051,7 +4181,11 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 8323515050614222158, guid: 67420a51936ac3a4688780ebd8d8cd3f, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3481639790172983208, guid: 67420a51936ac3a4688780ebd8d8cd3f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1239718432}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5746053834697347896, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
@@ -4062,6 +4196,12 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 866134692}
   m_SourcePrefab: {fileID: 100100000, guid: 67420a51936ac3a4688780ebd8d8cd3f, type: 3}
+--- !u!4 &3620406619468220887 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3481639790172983208, guid: 67420a51936ac3a4688780ebd8d8cd3f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3620406619468220886}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4599059136941461621
 GameObject:
   m_ObjectHideFlags: 0
@@ -4202,7 +4342,7 @@ PrefabInstance:
     - target: {fileID: 3216159690916397291, guid: b598903d276f09b42ba3c1d2ef7b2037,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -20.75
+      value: -72.42
       objectReference: {fileID: 0}
     - target: {fileID: 3216159690916397291, guid: b598903d276f09b42ba3c1d2ef7b2037,
         type: 3}
@@ -4276,7 +4416,7 @@ SceneRoots:
   - {fileID: 1561885168}
   - {fileID: 1923975230}
   - {fileID: 1216057908}
-  - {fileID: 9102466942400818464}
   - {fileID: 15655089}
+  - {fileID: 9102466942400818464}
   - {fileID: 1611222677}
   - {fileID: 8558639898703225624}
