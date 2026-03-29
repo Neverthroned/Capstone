@@ -5,29 +5,37 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     [SerializeField] private float maxHealth;
-
     private float currentHealth;
-
     public HealthBar healthBar;
+
+    [Header("Damage Cooldown")]
+    public float damageCooldown = 0.5f;
+    private float _lastDamageTime = -999f;
 
     private void Start()
     {
         currentHealth = maxHealth;
-
         healthBar.SetSliderMax(maxHealth);
     }
 
     private void SetHealth(float value)
     {
-        Debug.Log($"SetHealth called with: {value}");
         currentHealth = Mathf.Clamp(value, 0f, maxHealth);
         healthBar.SetSlider(currentHealth);
     }
 
     public void TakeDamage(float amount)
     {
-        Debug.Log($"TakeDamage called with: {amount}, currentHealth: {currentHealth}");
         SetHealth(currentHealth - amount);
+    }
+
+    // Use this for damage sources that fire every tick like the flamethrower
+    public void TakeDamageWithCooldown(float amount)
+    {
+        if (Time.time - _lastDamageTime < damageCooldown) return;
+        _lastDamageTime = Time.time;
+        SetHealth(currentHealth - amount);
+        Debug.Log($"Flame damage: {amount}, health now: {currentHealth}");
     }
 
     public void Heal(float amount)
@@ -37,7 +45,7 @@ public class PlayerStats : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.G))
+        if (Input.GetKeyUp(KeyCode.G))
         {
             Heal(20f);
         }

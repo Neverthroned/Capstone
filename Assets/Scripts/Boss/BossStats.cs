@@ -56,9 +56,6 @@ public class BossStats : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyUp(KeyCode.F))
-        {
-            TakeDamage(20f);
-        }
+       
     }
 }

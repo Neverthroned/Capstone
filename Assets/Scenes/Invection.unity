@@ -1983,6 +1983,59 @@ Transform:
   - {fileID: 1751498594}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &746179353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 746179354}
+  - component: {fileID: 746179355}
+  m_Layer: 0
+  m_Name: Flamethrower Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &746179354
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746179353}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 4.42}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3620406619468220887}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &746179355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 746179353}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 797c88870c8c564438ffdb9be08cc7d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  segmentCount: 12
+  segmentSpacing: 4.4
+  minFollowSpeed: 2
+  maxFollowSpeed: 3
+  damageRadius: 0.65
+  flameSpeed: 7
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &866134687 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5714278816049862988, guid: 67420a51936ac3a4688780ebd8d8cd3f,
@@ -2376,9 +2429,8 @@ GameObject:
   - component: {fileID: 1239718432}
   - component: {fileID: 1239718434}
   - component: {fileID: 1239718433}
-  - component: {fileID: 1239718435}
   m_Layer: 0
-  m_Name: Flamethrower
+  m_Name: FlamethrowerVFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2479,22 +2531,6 @@ VisualEffect:
       m_Array: []
     m_Bool:
       m_Array: []
---- !u!114 &1239718435
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1239718431}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 797c88870c8c564438ffdb9be08cc7d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  segmentCount: 12
-  segmentSpacing: 0.5
-  followSpeed: 15
-  damageRadius: 0.4
 --- !u!1 &1268833675
 GameObject:
   m_ObjectHideFlags: 0
@@ -4005,6 +4041,20 @@ MonoBehaviour:
   healthBar: {fileID: 1992756013}
   resistanceThreshold: 0.5
   damageMultiplier: 0.5
+--- !u!114 &2097356884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2097356878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75fddc7e51f710149a79d7502c4605df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collisionScript: {fileID: 746179355}
+  flamethrowerVFX: {fileID: 1239718434}
 --- !u!4 &543450653090840205
 Transform:
   m_ObjectHideFlags: 0
@@ -4186,11 +4236,19 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1239718432}
+    - targetCorrespondingSourceObject: {fileID: 3481639790172983208, guid: 67420a51936ac3a4688780ebd8d8cd3f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 746179354}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5746053834697347896, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2097356881}
+    - targetCorrespondingSourceObject: {fileID: 5746053834697347896, guid: 67420a51936ac3a4688780ebd8d8cd3f,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2097356884}
     - targetCorrespondingSourceObject: {fileID: 5714278816049862988, guid: 67420a51936ac3a4688780ebd8d8cd3f,
         type: 3}
       insertIndex: -1
