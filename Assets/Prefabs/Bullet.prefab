@@ -151,3 +151,4 @@ MonoBehaviour:
   speed: 50
   damageAmount: 3
   lifetime: 7
+  blackHoleInfluence: 2

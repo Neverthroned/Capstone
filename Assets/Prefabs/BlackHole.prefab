@@ -152,12 +152,13 @@ MonoBehaviour:
   speed: 10
   scaleUpDuration: 3
   maxScale: 10
-  gravityRadius: 100
-  gravityStrength: 20
-  mergeDistance: 2
+  gravityRadius: 1000
+  gravityStrength: 100
+  mergeDistance: 3
   whiteHolePrefab: {fileID: 7746434689395991740, guid: b598903d276f09b42ba3c1d2ef7b2037,
     type: 3}
   damageAmount: 10
+  lifetime: 20
   affectedLayers:
     serializedVersion: 2
     m_Bits: 512

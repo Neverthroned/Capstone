@@ -29,7 +29,7 @@ public class PlayerStats : MonoBehaviour
         SetHealth(currentHealth - amount);
     }
 
-    // Use this for damage sources that fire every tick like the flamethrower
+    // I Frames lol
     public void TakeDamageWithCooldown(float amount)
     {
         if (Time.time - _lastDamageTime < damageCooldown) return;

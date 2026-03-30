@@ -21,6 +21,10 @@ public class BlackHoleProjectile : MonoBehaviour
     [Header("Damage")]
     public float damageAmount = 10f;
 
+    [Header("Lifetime")]
+    public float lifetime = 8f;
+    private float _elapsed = 0f;
+
     [SerializeField] private LayerMask affectedLayers;
     [SerializeField] private LayerMask damageLayers;
 
@@ -28,13 +32,21 @@ public class BlackHoleProjectile : MonoBehaviour
 
     private bool isActive = false;
 
+
     private Vector3 velocity;
     private Rigidbody rb;
 
-    private void Start()
+    public static List<BlackHoleProjectile> ActiveBlackHoles = new List<BlackHoleProjectile>();
+
+    private void OnEnable() => ActiveBlackHoles.Add(this);
+    private void OnDisable() => ActiveBlackHoles.Remove(this);
+
+    private void Awake()
     {
         playerStats = FindFirstObjectByType<PlayerStats>();
         rb = GetComponent<Rigidbody>();
+        rb.useGravity = false;
+        rb.isKinematic = false;
     }
 
     public void Launch()
@@ -47,11 +59,33 @@ public class BlackHoleProjectile : MonoBehaviour
     {
         if (!isActive || rb == null) return;
 
+        _elapsed += Time.deltaTime;
+        if (_elapsed >= lifetime)
+        {
+            StartCoroutine(ExpireRoutine());
+            isActive = false;
+            return;
+        }
+
         HandleHoming();
         ApplyGravityToNearby();
     }
 
-    // CONSTANT HOMING (not coroutine-based anymore)
+    private IEnumerator ExpireRoutine()
+    {
+        float t = 0f;
+        float shrinkDuration = 0.4f;
+        Vector3 startScale = transform.localScale;
+        while (t < shrinkDuration)
+        {
+            t += Time.deltaTime;
+            transform.localScale = Vector3.Lerp(startScale, Vector3.zero, t / shrinkDuration);
+            yield return null;
+        }
+        DestroyBlackHole();
+    }
+
+    // CONSTANT HOMING 
     private void HandleHoming()
     {
         if (target == null) return;
@@ -63,6 +97,7 @@ public class BlackHoleProjectile : MonoBehaviour
         transform.LookAt(target.transform);
     }
 
+    // Does as function says it does
     private void ApplyGravityToNearby()
     {
         Collider[] hits = Physics.OverlapSphere(transform.position, gravityRadius, affectedLayers);
@@ -124,9 +159,11 @@ public class BlackHoleProjectile : MonoBehaviour
         transform.localScale = Vector3.one * maxScale;
     }
 
+    // I think therefore I am
     public void DestroyBlackHole()
     {
         isActive = false;
+        ActiveBlackHoles.Remove(this);
         Destroy(gameObject);
     }
 }

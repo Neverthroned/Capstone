@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WhiteHoleProjectile : MonoBehaviour
+public class PlasmaProjectile : MonoBehaviour
 {
     public float scaleUpDuration = 0.5f;
     public float maxScale = 1.0f;
@@ -23,12 +23,14 @@ public class WhiteHoleProjectile : MonoBehaviour
 
     private Rigidbody rb;
 
-    private void Start()
+    private bool justBounced = false;
+
+    private void Awake()
     {
-        playerStats = FindFirstObjectByType<PlayerStats>();
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        rb.isKinematic = false; // Must be false for OnCollisionEnter to fire
+        rb.isKinematic = false;
+        playerStats = FindFirstObjectByType<PlayerStats>();
     }
 
     public void Launch(Vector3 initialVelocity)
@@ -36,49 +38,49 @@ public class WhiteHoleProjectile : MonoBehaviour
         velocity = initialVelocity.magnitude > 0.1f
             ? initialVelocity.normalized * Mathf.Max(initialVelocity.magnitude, maxSpeed * 0.3f)
             : Random.onUnitSphere * maxSpeed * 0.3f;
-
         rb.velocity = velocity;
         StartCoroutine(ScaleRoutine());
     }
 
     private void Update()
     {
-        // Accelerate up to max speed
+        if (BlackHoleProjectile.ActiveBlackHoles.Count > 0)
+        {
+            var blackHole = BlackHoleProjectile.ActiveBlackHoles[0];
+            if (blackHole != null)
+            {
+                Vector3 direction = (blackHole.transform.position - transform.position).normalized;
+                rb.velocity = Vector3.Lerp(rb.velocity, direction * maxSpeed, Time.deltaTime * 5f);
+            }
+            return; // Skip normal acceleration entirely
+        }
+
+        // Normal acceleration when no black hole
         if (rb.velocity.magnitude < maxSpeed)
             rb.velocity += rb.velocity.normalized * acceleration * Time.deltaTime;
-
         rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-
         int otherLayer = collision.gameObject.layer;
 
-        // DAMAGE PLAYER (layer-based)
         if ((damageLayers.value & (1 << otherLayer)) != 0)
         {
-            Debug.Log($"playerStats is null: {playerStats == null}");
             PlayerStats stats = collision.gameObject.GetComponentInParent<PlayerStats>();
-            if (stats != null)
-            {
-                stats.TakeDamage(damageAmount);
-            }
-
-            DestroyWhiteHole();
+            if (stats != null) stats.TakeDamage(damageAmount);
+            DestroyPlasma();
             return;
         }
 
-        // OTHERWISE: bounce
         Vector3 normal = collision.contacts[0].normal;
-        velocity = Vector3.Reflect(velocity, normal) * bounceDamping;
-
-        rb.velocity = velocity;
+        // Ensure bouncing happens
+        float currentSpeed = Mathf.Max(rb.velocity.magnitude, maxSpeed * 0.5f);
+        rb.velocity = Vector3.Reflect(rb.velocity.normalized, normal) * currentSpeed * bounceDamping;
+        justBounced = true;
 
         bounceCount++;
-
-        if (bounceCount >= maxBounces)
-            DestroyWhiteHole();
+        if (bounceCount >= maxBounces) DestroyPlasma();
     }
 
     private IEnumerator ScaleRoutine()
@@ -98,7 +100,7 @@ public class WhiteHoleProjectile : MonoBehaviour
         transform.localScale = Vector3.one * maxScale;
     }
 
-    public void DestroyWhiteHole()
+    public void DestroyPlasma()
     {
         Destroy(gameObject);
     }

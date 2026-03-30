@@ -6,14 +6,14 @@ public class PlayerShoot : MonoBehaviour
 {
     [Header("Shooting")]
     public GameObject projectilePrefab;
-    public Transform firePoint;         // Empty GameObject at gun barrel position
-    public float fireRate = 0.1f;       // Seconds between shots
-
+    public Transform firePoint;
+    public float fireRate = 0.1f;
     private float nextFireTime = 0f;
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && Time.time >= nextFireTime)
+        // Hold to shoot
+        if (Input.GetKey(KeyCode.Mouse0) && Time.time >= nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
             Shoot();
@@ -22,6 +22,6 @@ public class PlayerShoot : MonoBehaviour
 
     private void Shoot()
     {
-        GameObject bullet = Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
+        Instantiate(projectilePrefab, firePoint.position, firePoint.rotation);
     }
 }
