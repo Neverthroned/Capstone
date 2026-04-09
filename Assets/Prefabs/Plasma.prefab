@@ -96,7 +96,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3317394363152558217}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 255723ee61fcca645961ef2c1ec57b7c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -125,8 +125,8 @@ MonoBehaviour:
   scaleUpDuration: 0.5
   maxScale: 2
   bounceDamping: 0.85
-  acceleration: 5
-  maxSpeed: 15
+  acceleration: 10
+  maxSpeed: 30
   maxBounces: 15
   damageAmount: 20
   damageLayers:

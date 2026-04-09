@@ -10,6 +10,9 @@ public class PlasmaProjectile : MonoBehaviour
     public float acceleration = 5f;        // How quickly it reaches max speed
     public float maxSpeed = 15f;           // Speed cap
     public int maxBounces = 5;             // Bounces before destruction
+    private float _lastBounceTime = -1f;
+    private float _bounceCooldown = 0.1f;
+
 
     private PlayerStats playerStats;
 
@@ -29,7 +32,8 @@ public class PlasmaProjectile : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rb.useGravity = false;
-        rb.isKinematic = false;
+        rb.isKinematic = true; // Switch to kinematic, we move it manually
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
         playerStats = FindFirstObjectByType<PlayerStats>();
     }
 
@@ -38,7 +42,6 @@ public class PlasmaProjectile : MonoBehaviour
         velocity = initialVelocity.magnitude > 0.1f
             ? initialVelocity.normalized * Mathf.Max(initialVelocity.magnitude, maxSpeed * 0.3f)
             : Random.onUnitSphere * maxSpeed * 0.3f;
-        rb.velocity = velocity;
         StartCoroutine(ScaleRoutine());
     }
 
@@ -50,37 +53,48 @@ public class PlasmaProjectile : MonoBehaviour
             if (blackHole != null)
             {
                 Vector3 direction = (blackHole.transform.position - transform.position).normalized;
-                rb.velocity = Vector3.Lerp(rb.velocity, direction * maxSpeed, Time.deltaTime * 5f);
+                velocity = Vector3.Lerp(velocity, direction * maxSpeed, Time.deltaTime * 5f);
             }
-            return; // Skip normal acceleration entirely
         }
-
-        // Normal acceleration when no black hole
-        if (rb.velocity.magnitude < maxSpeed)
-            rb.velocity += rb.velocity.normalized * acceleration * Time.deltaTime;
-        rb.velocity = Vector3.ClampMagnitude(rb.velocity, maxSpeed);
-    }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        int otherLayer = collision.gameObject.layer;
-
-        if ((damageLayers.value & (1 << otherLayer)) != 0)
+        else
         {
-            PlayerStats stats = collision.gameObject.GetComponentInParent<PlayerStats>();
-            if (stats != null) stats.TakeDamage(damageAmount);
-            DestroyPlasma();
-            return;
+            if (velocity.magnitude < maxSpeed)
+                velocity += velocity.normalized * acceleration * Time.deltaTime;
+            velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
         }
 
-        Vector3 normal = collision.contacts[0].normal;
-        // Ensure bouncing happens
-        float currentSpeed = Mathf.Max(rb.velocity.magnitude, maxSpeed * 0.5f);
-        rb.velocity = Vector3.Reflect(rb.velocity.normalized, normal) * currentSpeed * bounceDamping;
-        justBounced = true;
+        // Raycast ahead to detect walls before moving through them
+        float moveDistance = velocity.magnitude * Time.deltaTime;
+        if (Physics.Raycast(transform.position, velocity.normalized, out RaycastHit hit, moveDistance + 0.1f))
+        {
+            int hitLayer = hit.collider.gameObject.layer;
 
-        bounceCount++;
-        if (bounceCount >= maxBounces) DestroyPlasma();
+            // Check if it's the player layer
+            if ((damageLayers.value & (1 << hitLayer)) != 0)
+            {
+                PlayerStats stats = hit.collider.GetComponentInParent<PlayerStats>();
+                if (stats != null) stats.TakeDamage(damageAmount);
+                DestroyPlasma();
+                return;
+            }
+
+            // Otherwise bounce
+            if (Time.time - _lastBounceTime >= _bounceCooldown)
+            {
+                _lastBounceTime = Time.time;
+                float currentSpeed = Mathf.Max(velocity.magnitude, maxSpeed * 0.5f);
+                velocity = Vector3.Reflect(velocity.normalized, hit.normal) * currentSpeed * bounceDamping;
+                transform.position += hit.normal * 0.1f;
+                bounceCount++;
+                if (bounceCount >= maxBounces)
+                {
+                    DestroyPlasma();
+                    return;
+                }
+            }
+        }
+
+        rb.MovePosition(transform.position + velocity * Time.deltaTime);
     }
 
     private IEnumerator ScaleRoutine()
