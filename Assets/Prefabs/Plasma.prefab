@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7388687913060535290}
   - component: {fileID: 2131444473746393545}
   - component: {fileID: 1521028359871034302}
+  - component: {fileID: 3314994033140963052}
   - component: {fileID: 3996983428306890497}
   - component: {fileID: 2629355192985497019}
   m_Layer: 9
@@ -96,7 +97,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3317394363152558217}
-  m_Material: {fileID: 13400000, guid: 255723ee61fcca645961ef2c1ec57b7c, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -110,6 +111,27 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!135 &3314994033140963052
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3317394363152558217}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.51
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3996983428306890497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,17 +144,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 262354336ddd6104a811a5aef42f2fb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxSpeed: 10
+  bounceDamping: 0.85
+  maxBounces: 15
   scaleUpDuration: 0.5
   maxScale: 2
-  bounceDamping: 0.85
-  acceleration: 10
-  maxSpeed: 30
-  maxBounces: 15
   damageAmount: 20
-  damageLayers:
+  wallLayer:
     serializedVersion: 2
-    m_Bits: 64
-  damageRadius: 3
+    m_Bits: 128
 --- !u!54 &2629355192985497019
 Rigidbody:
   m_ObjectHideFlags: 0

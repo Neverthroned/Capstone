@@ -149,6 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 50
-  damageAmount: 3
+  damageAmount: 1
   lifetime: 7
   blackHoleInfluence: 2

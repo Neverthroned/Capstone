@@ -1323,7 +1323,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 511935490}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 255723ee61fcca645961ef2c1ec57b7c, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -3246,7 +3246,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 263127
+    m_Bits: 264151
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8600000, guid: 3cbe10ac749d6924c9915a3241a32374, type: 2}
   m_TargetDisplay: 0
@@ -3301,6 +3301,7 @@ MonoBehaviour:
   - {fileID: 1341573821}
   target: {fileID: 2079834534}
   speed: 10
+  spreadAngle: 45
 --- !u!1 &1561885167
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,15 +4469,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plasma
       objectReference: {fileID: 0}
-    - target: {fileID: 3996983428306890497, guid: bd00969bf9b921544814d1dd6c28b3d1,
+    - target: {fileID: 3317394363152558217, guid: bd00969bf9b921544814d1dd6c28b3d1,
         type: 3}
-      propertyPath: maxSpeed
-      value: 30
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3821696186521805511, guid: bd00969bf9b921544814d1dd6c28b3d1,
+        type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3996983428306890497, guid: bd00969bf9b921544814d1dd6c28b3d1,
         type: 3}
-      propertyPath: acceleration
-      value: 10
+      propertyPath: wallLayer.m_Bits
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 4216836062122932678, guid: bd00969bf9b921544814d1dd6c28b3d1,
         type: 3}
@@ -4839,6 +4845,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 2991306290517338080, guid: 764d9f80c5890484caa1cfc392baf27c,
+        type: 3}
+      propertyPath: damageAmount
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7120117047501663193, guid: 764d9f80c5890484caa1cfc392baf27c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4934,6 +4945,7 @@ GameObject:
   - component: {fileID: 5110187421126213947}
   - component: {fileID: 2097356881}
   - component: {fileID: 2097356884}
+  - component: {fileID: 9043317282700810991}
   m_Layer: 8
   m_Name: Eye
   m_TagString: Untagged
@@ -4941,6 +4953,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &9043317282700810991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9043317282700810990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4d362473a941ab41b425818197cc8df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plasmaSpawner: {fileID: 1561740887}
+  blackHoleSpawner: {fileID: 1561740886}
+  flamethrowerController: {fileID: 2097356884}
+  bossStats: {fileID: 2097356881}
+  idleDuration: 2
+  plasmaAttackDuration: 4
+  flamethrowerDuration: 8
+  phase2Threshold: 0.5
+  finalBlackHoleThreshold: 0.018
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -4948,11 +4981,11 @@ SceneRoots:
   - {fileID: 526484035}
   - {fileID: 1731743994}
   - {fileID: 2013410475}
-  - {fileID: 2079834537}
   - {fileID: 1381605248}
   - {fileID: 42517676}
   - {fileID: 543450653090840205}
   - {fileID: 730274563}
+  - {fileID: 2079834537}
   - {fileID: 4579327155258806821}
   - {fileID: 9352819}
   - {fileID: 1216057908}

@@ -8,32 +8,34 @@ public class Plasma : MonoBehaviour
     public List<GameObject> spawnPositions;
     public GameObject target;
     public float speed = 1.0f;
+    public float spreadAngle = 45f; // Total cone spread in degrees
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            SpawnPlasma();
-        }
-    }
-
-    public void SpawnPlasma()
+    public void SpawnPlasma(int count)
     {
         Transform spawnPoint = spawnPositions[Random.Range(0, spawnPositions.Count)].transform;
+        Vector3 baseDirection = (target.transform.position - spawnPoint.position).normalized;
 
-        GameObject plasma = Instantiate(PlasmaPrefab, spawnPoint.position, PlasmaPrefab.transform.rotation);
-        plasma.transform.localScale = Vector3.zero;
-
-        PlasmaProjectile projectile = plasma.GetComponent<PlasmaProjectile>();
-
-        if (projectile == null)
+        for (int i = 0; i < count; i++)
         {
-            Debug.LogError("PlasmaPrefab is missing a PlasmaProjectile component!");
-            return;
-        }
+            // Spread projectiles evenly across the cone
+            float angle = count > 1
+                ? Mathf.Lerp(-spreadAngle / 2f, spreadAngle / 2f, i / (float)(count - 1))
+                : 0f;
 
-        // Direction from spawn point toward the player
-        Vector3 direction = (target.transform.position - spawnPoint.position).normalized;
-        projectile.Launch(direction * speed);
+            // Rotate the direction by the spread angle on the Y axis
+            Vector3 spreadDirection = Quaternion.Euler(0, angle, 0) * baseDirection;
+
+            GameObject plasma = Instantiate(PlasmaPrefab, spawnPoint.position, PlasmaPrefab.transform.rotation);
+            plasma.transform.localScale = Vector3.zero;
+
+            PlasmaProjectile projectile = plasma.GetComponent<PlasmaProjectile>();
+            if (projectile == null)
+            {
+                Debug.LogError("PlasmaPrefab is missing PlasmaProjectile component!");
+                continue;
+            }
+
+            projectile.Launch(spreadDirection * speed);
+        }
     }
 }

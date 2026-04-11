@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class FlamethrowerController : MonoBehaviour
+public class Flamethrower : MonoBehaviour
 {
     public FlamethrowerCollision collisionScript;
     public VisualEffect flamethrowerVFX;

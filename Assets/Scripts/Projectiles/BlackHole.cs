@@ -13,20 +13,17 @@ public class BlackHole : MonoBehaviour
     public float scaleUpDuration = 0.5f;
     public float maxScale = 1.0f;
 
-    private void Update()
+    public void SpawnBlackHole()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            GameObject blackHole = Instantiate(BlackHolePrefab, spawnPositions[Random.Range(0, spawnPositions.Count)].transform.position, BlackHolePrefab.transform.rotation);
-            blackHole.transform.localScale = Vector3.zero;
-            blackHole.transform.LookAt(target.transform);
+        GameObject blackHole = Instantiate(BlackHolePrefab, spawnPositions[Random.Range(0, spawnPositions.Count)].transform.position, BlackHolePrefab.transform.rotation);
+        blackHole.transform.localScale = Vector3.zero;
+        blackHole.transform.LookAt(target.transform);
 
-            BlackHoleProjectile projectile = blackHole.GetComponent<BlackHoleProjectile>();
-            projectile.target = target;
-            projectile.speed = speed;
-            projectile.scaleUpDuration = scaleUpDuration;
-            projectile.maxScale = maxScale;
-            projectile.Launch();
-        }
+        BlackHoleProjectile projectile = blackHole.GetComponent<BlackHoleProjectile>();
+        projectile.target = target;
+        projectile.speed = speed;
+        projectile.scaleUpDuration = scaleUpDuration;
+        projectile.maxScale = maxScale;
+        projectile.Launch();
     }
 }
