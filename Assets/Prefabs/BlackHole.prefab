@@ -150,8 +150,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   speed: 10
-  scaleUpDuration: 3
-  maxScale: 10
+  scaleUpDuration: 15
+  maxScale: 40
   gravityRadius: 1000
   gravityStrength: 100
   mergeDistance: 3

@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3314994033140963052}
   - component: {fileID: 3996983428306890497}
   - component: {fileID: 2629355192985497019}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: Plasma
   m_TagString: Projectile
   m_Icon: {fileID: 0}
@@ -146,7 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 10
   bounceDamping: 0.85
-  maxBounces: 15
+  maxBounces: 5
   scaleUpDuration: 0.5
   maxScale: 2
   damageAmount: 20
@@ -192,7 +192,7 @@ GameObject:
   - component: {fileID: 619447463897759009}
   - component: {fileID: 805951966432014490}
   - component: {fileID: 6062313850331830403}
-  m_Layer: 9
+  m_Layer: 10
   m_Name: EyeCore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
