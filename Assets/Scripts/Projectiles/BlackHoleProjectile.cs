@@ -134,8 +134,7 @@ public class BlackHoleProjectile : MonoBehaviour
             PlayerStats stats = hit.GetComponentInParent<PlayerStats>();
             if (stats != null)
             {
-                stats.TakeDamage(damageAmount);
-                DestroyBlackHole();
+                stats.TakeDamageWithCooldown(damageAmount);
                 return;
             }
         }

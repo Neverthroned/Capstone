@@ -161,7 +161,8 @@ Material:
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
-    - _Aberration_Intensity: 0.75
+    - _Aberration: 0
+    - _Aberration_Intensity: 1.42
     - _AddPrecomputedVelocity: 0
     - _AlbedoAffectEmissive: 0
     - _AlphaCutoff: 0.5
@@ -190,7 +191,7 @@ Material:
     - _DisplacementLockObjectScale: 1
     - _DisplacementLockTilingScale: 1
     - _DisplacementMode: 0
-    - _Dither_Opacity: 0.75
+    - _Dither_Opacity: 1
     - _DoubleSidedEnable: 0
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
@@ -227,7 +228,7 @@ Material:
     - _NormalScale: 1
     - _ObjectSpaceUVMapping: 0
     - _ObjectSpaceUVMappingEmissive: 0
-    - _Octaves: 3
+    - _Octaves: 11.9
     - _Offset: 0.5
     - _OpaqueCullMode: 2
     - _PPDLodThreshold: 5
@@ -236,7 +237,7 @@ Material:
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
     - _PerPixelSorting: 0
-    - _Quantization_Level: 1.4
+    - _Quantization_Level: 32
     - _RayTracing: 0
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
