@@ -1,17 +1,17 @@
 #ifndef WHITENOISE_INCLUDED
 #define WHITENOISE_INCLUDED
 
-// HDRP Shader Graph compatible 2D white noise
-// Note the change to 'void' and the 'out float Out' parameter.
+// 2D White Noise
 inline void WhiteNoise2D_float(float2 uv, out float Out)
 {
     // Mix coordinates into a pseudo-random number
     float dotProduct = dot(uv, float2(12.9898, 78.233));
     
-    // Assign the result to the 'Out' parameter instead of returning it
+    // Output
     Out = frac(sin(dotProduct) * 43758.5453);
 }
 
+// 3D White Noise (rgb vs bw)
 inline void WhiteNoise3D_float(float3 p, out float Out)
 {
     float dotProduct = dot(p, float3(12.9898, 78.233, 37.719));
