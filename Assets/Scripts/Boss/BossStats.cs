@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossStats : MonoBehaviour
 {
@@ -61,8 +62,12 @@ public class BossStats : MonoBehaviour
 
         healthBar.SetSlider(currentHealth);
 
-        if (currentHealth <= 0)
+        if (currentHealth <= 0f)
+        {
             Die();
+            SceneManager.LoadScene("WinScreen");
+        }
+        
     }
 
     private void Die()

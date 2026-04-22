@@ -11,5 +11,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Invection.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
+  - enabled: 1
+    path: Assets/Scenes/WinScreen.unity
+    guid: 5e46dc89d74c0674aa35e04c8d8f3bdc
+  - enabled: 1
+    path: Assets/Scenes/LoseScreen.unity
+    guid: 0ed445fe1dd0d6e479b963ff87cdceb0
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0

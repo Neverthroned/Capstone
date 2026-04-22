@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -22,6 +23,11 @@ public class PlayerStats : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(value, 0f, maxHealth);
         healthBar.SetSlider(currentHealth);
+
+        if(currentHealth <= 0f)
+        {
+            SceneManager.LoadScene("LoseScreen");
+        }
     }
 
     public void TakeDamage(float amount)
