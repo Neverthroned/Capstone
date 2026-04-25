@@ -47,6 +47,11 @@ public class BossStats : MonoBehaviour
             amount *= damageMultiplier;
 
         SetHealth(currentHealth - amount);
+
+        if (Input.GetKeyUp(KeyCode.J))
+        {
+            TakeDamage(499f);
+        }
     }
 
     private void SetHealth(float value)
@@ -78,6 +83,9 @@ public class BossStats : MonoBehaviour
 
     private void Update()
     {
-       
+        if (Input.GetKeyUp(KeyCode.J))
+        {
+            TakeDamage(499f);
+        }
     }
 }
