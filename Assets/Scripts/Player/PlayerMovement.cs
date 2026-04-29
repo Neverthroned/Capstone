@@ -30,12 +30,13 @@ public class Movement : MonoBehaviour
         rb.useGravity = false;
         rb.drag = 1.5f;        // global drag
         rb.angularDrag = 2f;
+
+
     }
 
     private void Update()
     {
         MyInput();
-
     }
 
     private void FixedUpdate()
