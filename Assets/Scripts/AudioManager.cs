@@ -21,7 +21,9 @@ public class AudioManager : MonoBehaviour
 
     [Header("Black Hole")]
     public AudioClip blackHoleLoop;
+    public float blackHoleFadeDuration = 1f;
     public float blackHoleDuckVolume = 0f; // How much to reduce all other audio
+    public float blackHoleVolume = 1f;
 
     private AudioSource _musicSource;
     private AudioSource _sfxSource;
@@ -139,20 +141,41 @@ public class AudioManager : MonoBehaviour
     // --- BLACK HOLE ---
     public void StartBlackHole()
     {
-        _blackHoleActive = true;
         if (blackHoleLoop != null)
         {
             _blackHoleSource.clip = blackHoleLoop;
+            _blackHoleSource.volume = 0f;
             _blackHoleSource.Play();
+            StartCoroutine(FadeSource(_blackHoleSource, 0f, blackHoleVolume, blackHoleFadeDuration));
         }
         StartCoroutine(DuckAudio(blackHoleDuckVolume));
     }
 
     public void StopBlackHole()
     {
-        _blackHoleActive = false;
+        StartCoroutine(FadeOutBlackHole());
+        StartCoroutine(DuckAudio(musicVolume));
+    }
+
+    private IEnumerator FadeOutBlackHole()
+    {
+        yield return StartCoroutine(FadeSource(_blackHoleSource, blackHoleVolume, 0f, blackHoleFadeDuration));
         _blackHoleSource.Stop();
-        StartCoroutine(DuckAudio(_defaultSFXVolume));
+    }
+
+    private IEnumerator FadeSource(AudioSource source, float startVolume, float targetVolume, float duration)
+    {
+        float elapsed = 0f;
+        source.volume = startVolume;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            source.volume = Mathf.Lerp(startVolume, targetVolume, elapsed / duration);
+            yield return null;
+        }
+
+        source.volume = targetVolume;
     }
 
     // Smoothly lower/raise all other audio

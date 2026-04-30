@@ -2534,12 +2534,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 031af10b3ad72a74b88d9cb1191144d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plasmaShoot: {fileID: 0}
-  plasmaWarning: {fileID: 0}
+  phase1Music: {fileID: 8300000, guid: 532b06cacceaad14a99c4d167ed2e45a, type: 3}
+  phase2Music: {fileID: 0}
+  musicVolume: 0.6
+  plasmaShoot: {fileID: 8300000, guid: 9dec104fb3d20264f86d81da2a7e4bb6, type: 3}
+  plasmaWarning: {fileID: 8300000, guid: d80e5b20fcf73cd42bce0f034281bf3e, type: 3}
   plasmaWarningDistance: 3
-  flamethrowerLoop: {fileID: 0}
-  blackHoleLoop: {fileID: 0}
+  flamethrowerLoop: {fileID: 8300000, guid: 7d039723d53be2a4caaf35f1799a2aba, type: 3}
+  blackHoleLoop: {fileID: 8300000, guid: 5ffd271783b39914a9caca7cd00af938, type: 3}
+  blackHoleFadeDuration: 1
   blackHoleDuckVolume: 0
+  blackHoleVolume: 1
 --- !u!1 &1210677146
 GameObject:
   m_ObjectHideFlags: 0
