@@ -7,6 +7,9 @@ public class MainMenu : MonoBehaviour
 {
     public void PlayGame()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         SceneManager.LoadScene("Invection");
     }
 

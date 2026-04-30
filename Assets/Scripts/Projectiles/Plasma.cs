@@ -12,6 +12,8 @@ public class Plasma : MonoBehaviour
 
     public void SpawnPlasma(int count)
     {
+        AudioManager.Instance.PlayPlasmaShoot();
+
         Transform spawnPoint = spawnPositions[Random.Range(0, spawnPositions.Count)].transform;
         Vector3 baseDirection = (target.transform.position - spawnPoint.position).normalized;
 

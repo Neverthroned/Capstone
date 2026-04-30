@@ -2490,6 +2490,56 @@ Transform:
   m_Children: []
   m_Father: {fileID: 730274563}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1133132234
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1133132235}
+  - component: {fileID: 1133132236}
+  m_Layer: 0
+  m_Name: Audio Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1133132235
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133132234}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -36.345913, y: -27.944036, z: -23.62462}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1133132236
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1133132234}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 031af10b3ad72a74b88d9cb1191144d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plasmaShoot: {fileID: 0}
+  plasmaWarning: {fileID: 0}
+  plasmaWarningDistance: 3
+  flamethrowerLoop: {fileID: 0}
+  blackHoleLoop: {fileID: 0}
+  blackHoleDuckVolume: 0
 --- !u!1 &1210677146
 GameObject:
   m_ObjectHideFlags: 0
@@ -4209,7 +4259,7 @@ GameObject:
   - component: {fileID: 1855386270}
   - component: {fileID: 1855386269}
   m_Layer: 0
-  m_Name: GameManager
+  m_Name: Game Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5495,6 +5545,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 526484035}
   - {fileID: 9352819}
+  - {fileID: 1133132235}
   - {fileID: 1855386270}
   - {fileID: 1731743994}
   - {fileID: 2013410475}

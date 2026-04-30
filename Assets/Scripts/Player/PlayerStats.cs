@@ -26,6 +26,9 @@ public class PlayerStats : MonoBehaviour
 
         if(currentHealth <= 0f)
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+
             SceneManager.LoadScene("LoseScreen");
         }
     }

@@ -32,11 +32,13 @@ public class Flamethrower : MonoBehaviour
         {
             collisionScript.ResetActivation();
             flamethrowerVFX.Play();
+            AudioManager.Instance.StartFlamethrower();
         }
         else
         {
             collisionScript.DisableDamage();
             flamethrowerVFX.Stop();
+            AudioManager.Instance.StopFlamethrower();
         }
     }
 }

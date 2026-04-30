@@ -36,6 +36,7 @@ public class BossController : MonoBehaviour
 
     private void Start()
     {
+        AudioManager.Instance.PlayPhase1Music();
         EnterState(BossState.Idle);
     }
 
@@ -140,12 +141,16 @@ public class BossController : MonoBehaviour
     private IEnumerator BlackHoleRoutine()
     {
         bossStats.SetInvincible(true);
-
         blackHoleSpawner.SpawnBlackHole();
+        AudioManager.Instance.StartBlackHole();
 
         yield return new WaitUntil(() => BlackHoleProjectile.ActiveBlackHoles.Count == 0);
 
         bossStats.SetInvincible(false);
+        AudioManager.Instance.StopBlackHole();
+
+        if (_inPhase2)
+            AudioManager.Instance.PlayPhase2Music();
 
         if (_secondBlackHoleUsed)
         {

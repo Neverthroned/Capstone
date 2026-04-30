@@ -54,6 +54,7 @@ public class BlackHoleProjectile : MonoBehaviour
     public void Launch()
     {
         isActive = true;
+        AudioManager.Instance.StartBlackHole();
         StartCoroutine(ScaleRoutine());
     }
 
@@ -165,6 +166,7 @@ public class BlackHoleProjectile : MonoBehaviour
     {
         isActive = false;
         ActiveBlackHoles.Remove(this);
+        AudioManager.Instance.StopBlackHole();
         Destroy(gameObject);
     }
 }
