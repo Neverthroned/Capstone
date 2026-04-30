@@ -70,6 +70,8 @@ public class BossStats : MonoBehaviour
         if (currentHealth <= 0f)
         {
             Die();
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("WinScreen");
         }
         

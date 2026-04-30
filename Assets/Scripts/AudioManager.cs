@@ -25,6 +25,10 @@ public class AudioManager : MonoBehaviour
     public float blackHoleDuckVolume = 0f; // How much to reduce all other audio
     public float blackHoleVolume = 1f;
 
+    [Header("References")]
+    public Transform bossTransform;
+    public Transform blackHoleTransform;
+
     private AudioSource _musicSource;
     private AudioSource _sfxSource;
     private AudioSource _flamethrowerSource;
@@ -47,23 +51,41 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Create audio sources
-        _musicSource = CreateSource("Music", true, 1f);
-        _sfxSource = CreateSource("SFX", false, 1f);
-        _flamethrowerSource = CreateSource("Flamethrower", true, 1f);
-        _blackHoleSource = CreateSource("BlackHole", true, 1f);
+        _musicSource = CreateSource("Music", true, musicVolume, false);        // Music stays 2D
+        _sfxSource = CreateSource("SFX", false, 1f, false);                    // Oneshots stay 2D
+        _flamethrowerSource = CreateSource("Flamethrower", true, 1f, true);    // 3D
+        _blackHoleSource = CreateSource("BlackHole", true, 1f, true);          // 3D
 
         _defaultMusicVolume = _musicSource.volume;
         _defaultSFXVolume = _sfxSource.volume;
     }
 
-    private AudioSource CreateSource(string name, bool loop, float volume)
+    private AudioSource CreateSource(string name, bool loop, float volume, bool spatial = false)
     {
         GameObject obj = new GameObject($"AudioSource_{name}");
         obj.transform.parent = transform;
         AudioSource source = obj.AddComponent<AudioSource>();
         source.loop = loop;
         source.volume = volume;
+
+        if (spatial)
+        {
+            source.spatialBlend = 1f;
+            source.rolloffMode = AudioRolloffMode.Logarithmic;
+            source.minDistance = 3f;
+            source.maxDistance = 20f;
+        }
+
         return source;
+    }
+
+    private void Update()
+    {
+        // Keep black hole audio source at black hole position
+        if (_blackHoleSource.isPlaying && BlackHoleProjectile.ActiveBlackHoles.Count > 0)
+        {
+            _blackHoleSource.transform.position = BlackHoleProjectile.ActiveBlackHoles[0].transform.position;
+        }
     }
 
     // --- MUSIC ---
@@ -129,6 +151,7 @@ public class AudioManager : MonoBehaviour
     public void StartFlamethrower()
     {
         if (flamethrowerLoop == null) return;
+        _flamethrowerSource.transform.position = bossTransform.position;
         _flamethrowerSource.clip = flamethrowerLoop;
         _flamethrowerSource.Play();
     }
